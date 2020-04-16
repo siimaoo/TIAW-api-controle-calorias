@@ -7,12 +7,15 @@ dotenv.config({path: './config/.env'});
 import userRoutes from './routes/user.routes';
 import itemsRoutes from './routes/items.routes';
 
+import automatedTasks from './controllers/automated-tasks.controller';
+
 class App {
   constructor() {
     this.express = express();
     this.database();
     this.middlewares();
     this.routes();
+    this.crons();
   }
 
   database() {
@@ -38,6 +41,10 @@ class App {
   routes() {
     this.express.use(userRoutes);
     this.express.use(itemsRoutes);
+  }
+
+  crons() {
+    automatedTasks.resetCalories();
   }
 }
 
