@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config({path: './config/.env'});
 
 import userRoutes from './routes/user.routes';
+import itemsRoutes from './routes/items.routes';
 
 class App {
   constructor() {
@@ -36,6 +37,7 @@ class App {
 
   routes() {
     this.express.use(userRoutes);
+    this.express.use(itemsRoutes);
   }
 }
 
