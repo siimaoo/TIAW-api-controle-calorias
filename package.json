@@ -1,0 +1,22 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api trabalho calorias",
+  "main": "app.js",
+  "author": "Lucas Simão",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.9",
+    "sucrase": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
