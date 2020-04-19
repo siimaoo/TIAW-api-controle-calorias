@@ -5,17 +5,7 @@ class AutomatedTasks {
   resetCalories() {
     schedule.scheduleJob('0 0 * * 0', async () => {
       for await (const doc of User.find()) {
-        let kcal = 0;
-
-        if (doc.imc > 24.9) {
-          kcal = 20;  
-        } else if (doc.imc < 18.5) {
-          kcal = 30;
-        } else {
-          kcal = 25;
-        }
-
-        const recomendedKcal = doc.weight * kcal;
+        const recomendedKcal = doc.consume.recomended;
 
         const day = doc.consume;
 

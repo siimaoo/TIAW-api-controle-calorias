@@ -1,5 +1,36 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
+
+const ConsumeData = {
+  sunday: {
+    total: 0,
+    items: []
+  },
+  monday: {
+    total: 0,
+    items: []
+  },
+  tuesday: {
+    total: 0,
+    items: []
+  },
+  wednesday: {
+    total: 0,
+    items: []
+  },
+  thursday: {
+    total: 0,
+    items: []
+  },
+  friday: {
+    total: 0,
+    items: []
+  },
+  saturday: {
+    total: 0,
+    items: []
+  },
+};
 
 const UserSchema = new Schema({
   name: {
@@ -26,15 +57,18 @@ const UserSchema = new Schema({
   },
 
   imc: {
-    type: Number
+    type: Number,
+    default: 0
   },
 
   height: {
-    type: Number
+    type: Number,
+    default: 0
   },
 
   weight: {
-    type: Number
+    type: Number,
+    default: 0
   },
 
   positiveWeeks: {
@@ -42,77 +76,21 @@ const UserSchema = new Schema({
     default: 0
   },
 
-  consume: {
-    monday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    tuesday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    wednesday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    thursday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    friday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    saturday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    },
-    sunday: {
-      totalOfDay: {
-        type: Number,
-        default: 0
-      },
-      items: {
-        type: Array
-      }
-    }
+  recomendedKcal: {
+    type: Number,
+    default: 0,
   },
 
-  created: {type: Date, default: Date.now}
+  consume: {
+    type: Object,
+    default: ConsumeData
+  },
+  
+  created: { type: Date, default: Date.now }
 });
 
 UserSchema.pre('save', function (next) {
-  if(!this.isModified('password')) return next();
+  if (!this.isModified('password')) return next();
   bcrypt.hash(this.password, 10, (err, encrypted) => {
     this.password = encrypted;
     return next();

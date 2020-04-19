@@ -64,7 +64,6 @@ class UserController {
   async update(req, res) {
     const {id} = req.params;
     const {name, lastName, email, password, rePassword} = req.body;
-    
   }
 
   async updateImc(req, res) {
@@ -72,13 +71,28 @@ class UserController {
     const {height, weight} = req.body;
     const imc = weight/(height**2);
 
-    User.findOneAndUpdate(id, {
+    let kcal = 0;
+
+    if (imc > 24.9) {
+      kcal = 20;  
+    } else if (imc < 18.5) {
+      kcal = 30;
+    } else {
+      kcal = 25;
+    }
+
+    const recomendedKcal = weight * kcal;
+
+    await User.findOneAndUpdate(id, {
       $set: {
         height: height,
         weight: weight,
-        imc: imc
+        imc: imc,
+        consume: {
+          recomended: recomendedKcal
+        }
       }
-    }, (err, data) => {
+    }, {new: true}, (err, data) => {
       if (err) return res.send({success: false, message: "Ocorreu um erro durante a requisição!"});
       return res.send({success: true, data: data});
     })
