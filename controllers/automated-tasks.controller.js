@@ -5,11 +5,11 @@ class AutomatedTasks {
   resetCalories() {
     schedule.scheduleJob('0 0 * * 0', async () => {
       for await (const doc of User.find()) {
-        const recomendedKcal = doc.consume.recomended;
+        const recomendedKcal = doc.consume.recomendedkcal;
 
         const day = doc.consume;
 
-        const sum = (day.monday.totalOfDay + day.tuesday.totalOfDay + day.wednesday.totalOfDay + day.thursday.totalOfDay + day.friday.totalOfDay + day.saturday.totalOfDay + day.sunday.totalOfDay) / 7;
+        const sum = (day.monday.total + day.tuesday.total + day.wednesday.total + day.thursday.total + day.friday.total + day.saturday.total + day.sunday.total) / 7;
 
         let positive = 0;
 
@@ -26,31 +26,31 @@ class AutomatedTasks {
           
             consume: {
               monday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               tuesday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               wednesday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               thursday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               friday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               saturday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               },
               sunday: {
-                totalOfDay: 0,
+                total: 0,
                 items: []
               }
             },

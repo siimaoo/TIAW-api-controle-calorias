@@ -1,5 +1,6 @@
 import data from '../data/data.json';
 import User from '../models/user.model';
+import {Types} from 'mongoose';
 
 class ItemController {
   async search(req, res) {
@@ -27,15 +28,22 @@ class ItemController {
 
     const stringDays = ['sunday', 'monday', 'tuesday', 'wednesday', ' thursday', 'friday', 'saturday'];
 
-    const idOfItem = user.consume[stringDays[dayWeek]].items.length;
+    const idOfItem = Types.ObjectId();
 
     const day = stringDays[dayWeek];
 
     const pathToPush = `consume.${day}.items`;
+    const pathToSet = `consume.${day}.total`;
+
+    const totalOfDay = user.consume[stringDays[dayWeek]].total;
 
     User.findByIdAndUpdate(id, {
+      $set: {
+        [pathToSet]: totalOfDay + kcal
+      },
+
       $push: {
-        [pathToPush]: { id: idOfItem, name: name, quantity: quantity, weight: weight, kcal: kcal }
+        [pathToPush]: { _id: idOfItem, name: name, quantity: quantity, weight: weight, kcal: kcal }
       }
     }, { new: true }, (err, data) => {
       if (err) return res.send({ success: false, message: "Ocorreu um erro durante a requisição!" });
@@ -56,13 +64,26 @@ class ItemController {
 
     const day = stringDays[dayWeek];
 
-    const pathToRemove = `consume.${day}.items`;
+    const pathToSet = `consume.${day}`;
 
-    User.findOneAndUpdate(id, {
-      $pull: {
-        [pathToRemove]: { id: idOfItem }
-      }
-    }, { new: true }, (err, data) => {
+    const totalOfDay = user.consume[stringDays[dayWeek]].total;
+
+    const currentItem = user.consume[stringDays[dayWeek]].items.filter(el => {
+      return el._id == idOfItem;
+    })
+
+    const x = user.consume[stringDays[dayWeek]].items.findIndex(el => el._id == idOfItem);
+
+    const newarr = user.consume[stringDays[dayWeek]].items.splice(x, 1);
+
+    User.findByIdAndUpdate(id, {
+      $set: {
+        [pathToSet]: {
+          total: totalOfDay - currentItem[0].kcal,
+          items: newarr
+        }
+      },
+    }, { new: true,}, (err, data) => {
       if (err) return res.send({ success: false, message: "Ocorreu um erro durante a requisição!" });
       return res.send({ success: true, data: data });
     });
