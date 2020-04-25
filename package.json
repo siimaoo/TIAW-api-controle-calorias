@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "nodemon server.js"
+    "start": "sucrase-node server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
