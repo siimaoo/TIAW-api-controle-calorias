@@ -34,7 +34,7 @@ class UserController {
           expiresIn: '7d'
         });
 
-        return res.send({success: true, token: token})
+        return res.send({success: true, token: token, id: id})
       });
     }).select('+password');
   }
@@ -56,7 +56,7 @@ class UserController {
           expiresIn: '7d'
         });
 
-        return res.send({success: true, token: token});
+        return res.send({success: true, token: token, id: id});
       })
     });
   }
@@ -83,14 +83,12 @@ class UserController {
 
     const recomendedKcal = weight * kcal;
 
-    await User.findOneAndUpdate(id, {
+    await User.findByIdAndUpdate(id, {
       $set: {
         height: height,
         weight: weight,
         imc: imc,
-        consume: {
-          recomended: recomendedKcal
-        }
+        recomendedKcal: recomendedKcal
       }
     }, {new: true}, (err, data) => {
       if (err) return res.send({success: false, message: "Ocorreu um erro durante a requisição!"});
