@@ -13,8 +13,9 @@ class UserController {
     return res.json(user);
   }
 
-  async logout(req, res) {
-    return res.status(200).send({success: true, token: null});
+  async rank(req, res) {
+    const users = await User.find({}).sort({positiveWeeks: 1}).limit(10).select(['name', 'lastName', 'positiveWeeks']);
+    return res.json(users);
   }
 
   async login(req, res) {

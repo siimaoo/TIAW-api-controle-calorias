@@ -20,9 +20,11 @@ class ItemController {
 
   async add(req, res) {
     const { id } = req.params;
-    const { name, quantity, weight, kcal } = req.body;
+    let { name, quantity, weight, kcal } = req.body;
     const date = new Date;
     const dayWeek = date.getDay();
+
+    kcal = parseInt(kcal);
 
     const user = await User.findById(id);
 

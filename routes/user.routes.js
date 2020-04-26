@@ -5,7 +5,8 @@ import {verifyAuth} from '../middlewares/verifyAuth.middleware';
 const userRoutes = Router();
 
 userRoutes.get('/users/:id', verifyAuth, userController.show);
-userRoutes.get('/users/logout', userController.logout);
+
+userRoutes.get('/rank', userController.rank);
 
 userRoutes.post('/users/signin', userController.login);
 userRoutes.post('/users/create', userController.create);
