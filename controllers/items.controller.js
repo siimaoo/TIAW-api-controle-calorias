@@ -72,9 +72,7 @@ class ItemController {
       return el._id == idOfItem;
     })
 
-    const x = user.consume[stringDays[dayWeek]].items.findIndex(el => el._id == idOfItem);
-
-    const newarr = user.consume[stringDays[dayWeek]].items.splice(x, 1);
+    const newarr = user.consume[stringDays[dayWeek]].items.filter(el => el._id != idOfItem);
 
     User.findByIdAndUpdate(id, {
       $set: {
