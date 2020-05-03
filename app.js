@@ -21,7 +21,8 @@ class App {
   database() {
     mongoose.connect(process.env.DATABASE, {
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
   }
 
