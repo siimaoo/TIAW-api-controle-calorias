@@ -8,7 +8,7 @@ API do controle de calorias para o Trabalho Interdisciplinar - Aplicações Web 
 * Yarn 1.19+ (ou npm)
 * MongoDB
 
-#### O que está sendo ultiliado?
+#### O que está sendo utilizado?
 * node.js
 * moongose
 * nodemon
