@@ -28,7 +28,7 @@ class ItemController {
 
     const user = await User.findById(id);
 
-    const stringDays = ['sunday', 'monday', 'tuesday', 'wednesday', ' thursday', 'friday', 'saturday'];
+    const stringDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
     const idOfItem = Types.ObjectId();
 
@@ -62,7 +62,7 @@ class ItemController {
 
     const user = await User.findById(id);
 
-    const stringDays = ['sunday', 'monday', 'tuesday', 'wednesday', ' thursday', 'friday', 'saturday'];
+    const stringDays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
     const day = stringDays[dayWeek];
 
