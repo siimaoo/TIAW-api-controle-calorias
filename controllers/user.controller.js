@@ -28,14 +28,11 @@ class UserController {
       bcrypt.compare(password, data.password, (err, same) => {
         if (!same) return res.send({success: false, message: "Usuario ou senha incorretos!"});
         data.password = undefined;
-       
-        console.log(data);
+
         const id = data.id;
         
-        if (data.admin) {
-          console.log(data.admin)
-
-          const token = jwt.sign({ rule: data.admin}, process.env.SECRET, {
+        if (data.admin == 'true') {
+          const token = jwt.sign({ rule: data.admin, id: id}, process.env.SECRET, {
             expiresIn: '7d'
           });
           return res.send({success: true, token: token, id: id})
