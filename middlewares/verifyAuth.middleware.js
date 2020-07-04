@@ -19,7 +19,7 @@ export function verifyAuthAdmin(req, res, next) {
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) return res.status(500).send({success: false, message: 'Falha ao autenticar o token!'});
     console.log(decoded);
-    if (!decoded.admin) return res.send({success: false, message: "Você não possui autorização!"});
+    if (!decoded.rule) return res.send({success: false, message: "Você não possui autorização!"});
     
     next();
   })

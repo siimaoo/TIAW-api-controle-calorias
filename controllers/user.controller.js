@@ -31,11 +31,18 @@ class UserController {
        
         console.log(data);
         const id = data.id;
-        const admin = data.admin;
+        
+        if (data.admin) {
+          const token = jwt.sign({ rule: admin, id: id }, process.env.SECRET, {
+            expiresIn: '7d'
+          });
+        } else {
+          const token = jwt.sign({ id: id }, process.env.SECRET, {
+            expiresIn: '7d'
+          });
+        }
 
-        const token = jwt.sign({ admin: admin, id: id }, process.env.SECRET, {
-          expiresIn: '7d'
-        });
+        
 
         return res.send({success: true, token: token, id: id})
       });
