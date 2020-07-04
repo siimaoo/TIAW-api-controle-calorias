@@ -33,7 +33,7 @@ class UserController {
         const id = data.id;
         const admin = data.admin;
 
-        const token = jwt.sign({ admin, id }, process.env.SECRET, {
+        const token = jwt.sign({ admin: admin, id: id }, process.env.SECRET, {
           expiresIn: '7d'
         });
 
