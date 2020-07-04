@@ -6,6 +6,7 @@ dotenv.config({path: './config/.env'});
 
 import userRoutes from './routes/user.routes';
 import itemsRoutes from './routes/items.routes';
+import recipeRoutes from './routes/recipe.routes';
 
 import automatedTasks from './controllers/automated-tasks.controller';
 
@@ -42,6 +43,7 @@ class App {
   routes() {
     this.express.use(userRoutes);
     this.express.use(itemsRoutes);
+    this.express.use(recipeRoutes);
   }
 
   crons() {
