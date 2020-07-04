@@ -10,7 +10,7 @@ export function verifyAuth(req, res, next) {
     
     next();
   })
-},
+}
 
 export function verifyAuthAdmin(req, res, next) {
   const token = req.headers['x-access-token'];
