@@ -31,17 +31,11 @@ class UserController {
 
         const id = data.id;
         
-        if (data.admin == 'true') {
-          const token = jwt.sign({ rule: data.admin, id: id}, process.env.SECRET, {
-            expiresIn: '7d'
-          });
-          return res.send({success: true, token: token, id: id})
-        } else {
-          const token = jwt.sign({ id: id }, process.env.SECRET, {
-            expiresIn: '7d'
-          });
-          return res.send({success: true, token: token, id: id})
-        }
+        const token = jwt.sign({ rule: data.admin, id: id}, process.env.SECRET, {
+          expiresIn: '7d'
+        });
+        
+        return res.send({success: true, token: token, id: id})
       });
     }).select('+password');
   }
