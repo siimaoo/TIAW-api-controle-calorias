@@ -36,15 +36,13 @@ class UserController {
           const token = jwt.sign({ rule: admin, id: id }, process.env.SECRET, {
             expiresIn: '7d'
           });
+          return res.send({success: true, token: token, id: id})
         } else {
           const token = jwt.sign({ id: id }, process.env.SECRET, {
             expiresIn: '7d'
           });
+          return res.send({success: true, token: token, id: id})
         }
-
-        
-
-        return res.send({success: true, token: token, id: id})
       });
     }).select('+password');
   }
