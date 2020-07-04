@@ -29,10 +29,11 @@ class UserController {
         if (!same) return res.send({success: false, message: "Usuario ou senha incorretos!"});
         data.password = undefined;
        
+        console.log(data);
         const id = data.id;
         const admin = data.admin;
 
-        const token = jwt.sign({ id, admin }, process.env.SECRET, {
+        const token = jwt.sign({ admin, id }, process.env.SECRET, {
           expiresIn: '7d'
         });
 
