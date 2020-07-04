@@ -33,7 +33,9 @@ class UserController {
         const id = data.id;
         
         if (data.admin) {
-          const token = jwt.sign({ rule: data.admin, id: id }, process.env.SECRET, {
+          console.log(data.admin)
+
+          const token = jwt.sign({ rule: data.admin}, process.env.SECRET, {
             expiresIn: '7d'
           });
           return res.send({success: true, token: token, id: id})
