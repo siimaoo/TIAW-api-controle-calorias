@@ -43,6 +43,8 @@ class UserController {
   async create(req, res) {
     const {name, lastName, email, password, rePassword} = req.body;
 
+    req.body.admin = false;
+    
     User.findOne({email: email}, (err, data) => {
       if(err) return res.send({success: false, message: "Ocorreu um erro durante a requisição!"});
       if (data) return res.send({success: false, message: "Usuario já registrado!"});

@@ -85,6 +85,11 @@ const UserSchema = new Schema({
     type: Object,
     default: ConsumeData
   },
+
+  admin: {
+    type: Boolean,
+    default: false,
+  },
   
   created: { type: Date, default: Date.now }
 });
