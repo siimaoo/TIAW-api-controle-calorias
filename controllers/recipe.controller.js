@@ -1,8 +1,8 @@
 import Recipe from '../models/recipe.model';
 
 class RecipeController {
-  show(req, res) {
-    const recipe = Recipe.find();
+  async show(req, res) {
+    const recipe = await Recipe.find({});
     return res.json(recipe);
   }
 
